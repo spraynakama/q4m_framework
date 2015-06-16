@@ -1,0 +1,16 @@
+#Common
+system_name = "ESS-TSOS SR12"
+jquery = "1.10.2"
+jqueryui = "1.10.4"
+jqueryui_theme = "redmond"
+
+
+# Navi
+order_mng = "Order Management"
+item_mng = "Item Management"
+user_mng = "User Management"
+logout = "logout"
+
+# Sub Navi User 
+customers = "Customers"
+internal = "Internal"

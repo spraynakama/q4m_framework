@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.nab-top-bar {
+    padding-bottom: 0px;
+    border-bottom: none;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  padding-top: 15px;
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.user_list {
+
+	cursor: pointer;	
+}
+
+
+label {
+    font-style:normal !important;
+    cursor: pointer;
+}
+/*+++++++ Order page +++++++++*/
+
+
+.pointer {
+    cursor: pointer;
+}
+
+/*+++++++ トップページ +++++++++*/
+#index_main {
+    margin-top: 120px;
+}
+.jumbotron-condensed {
+    padding: 20px;
+}
+
+.navbar .divider-vertical {
+  width: 1px;
+  height: 50px;
+  margin: 0px;
+  overflow: hidden;
+  background-color: #4b0082;
+  border-right: 1px solid #9400d3;
+}

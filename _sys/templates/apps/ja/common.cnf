@@ -1,0 +1,21 @@
+#Common
+system_name = "Curly ver. 0.1"
+jquery = "1.10.2"
+jqueryui = "1.10.4"
+jqueryui_theme = "redmond"
+
+
+# Navi
+home = "HOME"
+customer = "顧客"
+salon = "サロン"
+staff = "担当"
+ctl_menu = "管理者メニュー"
+user_ctl = "ユーザ管理"
+data_ctl = "データ管理"
+logout = "ログアウト"
+
+
+#login
+username = "Username"
+password = "Password"

@@ -1,0 +1,27 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+## When the file doesn't exist, 
+## any request is forwarded to q4m_index.php. END
+
+##    RewriteCond %{REQUEST_FILENAME} !-d
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} \/internal(\/+)
+	RewriteRule ^(.*)$ internal/q4m_index.php [QSA,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^(.*)$ apps/q4m_index.php [QSA,L]
+	
+
+</IfModule>
+
+    AuthType Digest
+    AuthName "Curly, you are linked yet!"
+    AuthDigestDomain /
+    AuthUserFile /var/www/CURLY/.htdigest
+    Require valid-user
+
+#order deny,allow
+#deny from all
+#allow from 192.168.11 61.45.39.131 210.225.94.193
