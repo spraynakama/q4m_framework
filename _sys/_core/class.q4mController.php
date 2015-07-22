@@ -53,6 +53,9 @@ class q4mController {
 
     $this->is_view = $is_view;
 
+    if ($this->is_view) {
+      $this->initView();
+    }
     if ($is_db) {
       $this->connectDB();
     }
@@ -146,9 +149,6 @@ class q4mController {
       $this->beforeAction();
     }
 
-    if ($this->is_view) {
-      $this->initView();
-    }
 
     if ($this->is_db && !$this->db) {
       $this->connectDB();
