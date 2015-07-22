@@ -107,4 +107,38 @@ class q4mModel {
     }
   }
 
+  public function makePaging($total, $from = null) {
+    if (!isset($from)) {
+      $from = 0;
+    }
+    require_once("Pager/Pager.php");
+    $options = array(
+        "mode" => 'Sliding',
+        "totalItems" => $total,
+        "delta" => 5,
+        "currentPage" => $from,
+        "perPage" => _LIMIT_,
+        "append" => false,
+        "path" => '',
+        "fileName" => '#" data-page="%d" class="page_link',
+        "prevImg" => '<span class="glyphicon glyphicon-chevron-left"></span>',
+        "nextImg" => '<span class="glyphicon glyphicon-chevron-right"></span>',
+        "firstPagePre" => "",
+        "firstPagePost" => "<li>",
+        "lastPagePre" => "",
+        "lastPagePost" => "</li>",
+        "separator" => '</li><li>',
+        "curPageSpanPre" => '<a href="#" class="active">',
+        "curPageSpanPost" => '</a>',
+        "spacesBeforeSeparator" => 0,
+        "spacesAfterSeparator" => 0
+    );
+    $pager = Pager::factory($options);
+    $navi = $pager->getLinks();
+    $str = '<li>' . $navi["all"] . '</li>';
+    $str = str_replace('&quot;', '"', $str);
+    $str = str_replace('<li><a href="#" class="active">', '<li class="active"><a href="#">', $str);
+    return $str;
+  }
+
 }
