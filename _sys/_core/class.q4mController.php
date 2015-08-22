@@ -247,33 +247,11 @@ class q4mController {
    */
   protected function display($tmp = null, $conf = null) {
 
-    $candidates = array();
-
     if (method_exists($this, 'beforeDisplay')) {
       $this->beforeDisplay();
     }
-
-    if ($tmp == null) {
-      $template = _MY_DIR_ . $this->lang . _DS_ . $this->class_basename . _DS_ . $this->template . '.' . $this->template_ext;
-
-
-      array_push($candidates, $template);
-
-      if (!file_exists(_SYS_DIR_ . _TEMPLATES_ . $template)) {
-        $template = _MY_DIR_ . _DEFAULT_LANG_ . _DS_ . $this->class_basename . _DS_ . $this->template . '.' . $this->template_ext;
-        array_push($candidates, $template);
-      }
-    } else {
-
-      $template = _MY_DIR_ . $this->lang . _DS_ . $this->class_basename . _DS_ . $tmp . '.' . $this->template_ext;
-      array_push($candidates, $template);
-
-      if (!file_exists(_SYS_DIR_ . _TEMPLATES_ . $template)) {
-
-        $template = _MY_DIR_ . _DEFAULT_LANG_ . _DS_ . $this->class_basename . _DS_ . $tmp . '.' . $this->template_ext;
-        array_push($candidates, $template);
-      }
-    }
+    
+    $template = $this->makeTemplatePath($tmp);
 
     if ($conf == null) {
       if ($tmp == null) {
@@ -287,14 +265,6 @@ class q4mController {
 
     if (file_exists(_SYS_DIR_ . _TEMPLATES_ . $config)) {
       $this->view->configLoad($config);
-    }
-
-
-    if (!file_exists(_SYS_DIR_ . _TEMPLATES_ . $template)) {
-
-      $files = implode("<br />\n", array_unique($candidates));
-      q4mSystem::haltOnError('Any of the flollowing file(s) does not exist', $files, __FILE__, __LINE__);
-      exit;
     }
 
     $this->view->assign('base_path', $this->base_path);
@@ -311,6 +281,37 @@ class q4mController {
     }
   }
 
+  public function makeTemplatePath($tmp = null) {
+
+    $candidates = array();
+    if ($tmp == null) {
+      $template = _MY_DIR_ . $this->lang . _DS_ . $this->class_basename . _DS_ . $this->template . '.' . $this->template_ext;
+      array_push($candidates, $template);
+      if (!file_exists(_SYS_DIR_ . _TEMPLATES_ . $template)) {
+        $template = _MY_DIR_ . _DEFAULT_LANG_ . _DS_ . $this->class_basename . _DS_ . $this->template . '.' . $this->template_ext;
+        array_push($candidates, $template);
+      }
+    } else {
+
+      $template = _MY_DIR_ . $this->lang . _DS_ . $this->class_basename . _DS_ . $tmp . '.' . $this->template_ext;
+      array_push($candidates, $template);
+
+      if (!file_exists(_SYS_DIR_ . _TEMPLATES_ . $template)) {
+
+        $template = _MY_DIR_ . _DEFAULT_LANG_ . _DS_ . $this->class_basename . _DS_ . $tmp . '.' . $this->template_ext;
+        array_push($candidates, $template);
+      }
+    }
+
+    if (!file_exists(_SYS_DIR_ . _TEMPLATES_ . $template)) {
+
+      $files = implode("<br />\n", array_unique($candidates));
+      q4mSystem::haltOnError('Any of the flollowing file(s) does not exist', $files, __FILE__, __LINE__);
+      exit;
+    }
+    return $template;
+  }
+  
   /**
    * Creates a model instance.
    * @param $datasource: a data source file to pass to the model constructer.
